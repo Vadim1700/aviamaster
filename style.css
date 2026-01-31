@@ -15,15 +15,28 @@ html, body {
   overflow-y: auto; /* ✅ прокрутка включена */
 }
 
-/* ✅ убираем только линию скролла */
-body::-webkit-scrollbar {
-  width: 0;
-  height: 0;
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  overflow-y: auto; /* прокрутка работает */
 }
-body {
-  -ms-overflow-style: none;  /* IE и Edge */
-  scrollbar-width: none;     /* Firefox */
+
+/* Chrome, Safari, Opera */
+::-webkit-scrollbar {
+  display: none;
 }
+
+/* Firefox */
+html, body {
+  scrollbar-width: none; /* скрыть */
+}
+
+/* IE и старый Edge */
+html, body {
+  -ms-overflow-style: none; /* скрыть */
+}
+
 
 .app {
   width: 100%;
@@ -66,6 +79,7 @@ body {
   color: orange;
   text-shadow: 0 0 10px orange;
   margin: 0;
+  margin-top: 30px;
 }
 
 #coef {
@@ -101,17 +115,18 @@ body {
   to { box-shadow: 0 0 25px gold, 0 0 40px orange; }
 }
 
-/* ✅ кнопки фиксированы под рамкой */
 .controls {
   width: 100%;
-  position: fixed;
-  bottom: -5%;       /* кнопки всегда внизу экрана */
+  position: absolute;   /* или fixed, в зависимости от твоей логики */
+  bottom: -5%;          /* текущее положение */
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 50px;     /* ✅ добавляем отступ сверху */
 }
+
 
 button {
   width: 90%;
@@ -185,3 +200,4 @@ input {
   background: #111;
   color: #fff;
 }
+
