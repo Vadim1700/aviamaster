@@ -1,0 +1,187 @@
+@font-face {
+  font-family: 'Bighaustitul';
+  src: url('Bighaustitul_extrabold.ttf') format('truetype');
+  font-weight: 900;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  font-family: 'Trebuchet MS', sans-serif;
+  background: url('IMG/Copilot_20260131_120237.png') no-repeat center center fixed;
+  background-size: cover;
+  color: #fff;
+  overflow-y: auto; /* ✅ прокрутка включена */
+}
+
+/* ✅ убираем только линию скролла */
+body::-webkit-scrollbar {
+  width: 0;
+  height: 0;
+}
+body {
+  -ms-overflow-style: none;  /* IE и Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
+.app {
+  width: 100%;
+  max-width: 400px;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* ✅ рамка фиксирована */
+.signal-frame {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: fixed;
+  top: 15%;          /* положение рамки от верхнего края */
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* ✅ блок сигналов и loader в одном месте */
+.signal-block {
+  position: absolute;
+  top: 55%; 
+  left: 50%;
+  transform: translate(-50%, -50%); /* центр по диагонали */
+  width: 75%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* текст по центру */
+  align-items: center;
+}
+
+/* текст сигналов */
+#distance {
+  font-family: 'Bighaustitul', sans-serif;
+  font-size: 3.5em;
+  font-weight: 900;
+  color: orange;
+  text-shadow: 0 0 10px orange;
+  margin: 0;
+}
+
+#coef {
+  font-family: 'Bighaustitul', sans-serif;
+  font-size: 5.5em;
+  font-weight: 900;
+  color: limegreen;
+  text-shadow: 0 0 10px limegreen;
+  margin: 5px 0 0 0;
+}
+
+/* loader по центру рамки */
+.loader {
+  position: absolute;
+  top: 50%; 
+  left: 50%;
+  transform: translate(-50%, -50%); /* ✅ центр по диагонали */
+  width: 50px;
+  height: 50px;
+  border: 6px solid #333;
+  border-top: 6px solid gold;
+  border-radius: 50%;
+  animation: spin 1s linear infinite; /* ✅ оставляем только вращение */
+}
+
+@keyframes spin {
+  0% { transform: translate(-50%, -50%) rotate(0deg);}
+  100% { transform: translate(-50%, -50%) rotate(360deg);}
+}
+
+@keyframes glow {
+  from { box-shadow: 0 0 10px gold; }
+  to { box-shadow: 0 0 25px gold, 0 0 40px orange; }
+}
+
+/* ✅ кнопки фиксированы под рамкой */
+.controls {
+  width: 100%;
+  position: fixed;
+  bottom: -5%;       /* кнопки всегда внизу экрана */
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+button {
+  width: 90%;
+  max-width: 300px;
+  padding: 15px;
+  font-size: 1.2em;
+  border: none;
+  border-radius: 10px;
+  background: linear-gradient(to bottom, crimson, orange);
+  color: gold;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 10px 0;
+  transition: transform 0.2s, box-shadow 0.3s;
+}
+
+button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px gold, 0 0 25px orange;
+}
+
+button:disabled {
+  background: #444;
+  color: #777;
+  cursor: not-allowed;
+}
+
+#countdown {
+  font-size: 1.1em;
+  color: gold;
+  margin-top: 5px;
+  text-align: center;
+}
+
+/* модальное окно */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: #222;
+  padding: 20px;
+  border-radius: 15px;
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  border: 2px solid gold;
+}
+
+.close {
+  position: absolute;
+  top: 10px; right: 15px;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: crimson;
+}
+
+input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 8px;
+  border: 1px solid gold;
+  background: #111;
+  color: #fff;
+}
