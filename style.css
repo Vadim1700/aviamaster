@@ -7,26 +7,28 @@
 html, body {
   margin: 0;
   padding: 0;
-  min-height: 200%; /* увеличили высоту, чтобы была прокрутка */
+  min-height: 200%; /* прокрутка */
   font-family: 'Trebuchet MS', sans-serif;
   background-color: #000;
   color: #fff;
-  overflow-y: auto; /* прокрутка включена */
+  overflow-y: auto;
 }
 
-/* картинка фиксируется сверху */
+/* фон */
 body::before {
   content: "";
   position: fixed;
-  top: 0; left: 0;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
   width: 100%;
+  max-width: 768px;   /* ограничение по горизонтали */
   height: 100vh;
   background: url('IMG/Copilot_20260131_120237.png') no-repeat center center;
   background-size: cover;
   z-index: -1;
 }
 
-/* скрываем линию скролла */
+/* скрываем скролл */
 ::-webkit-scrollbar { display: none; }
 html, body {
   scrollbar-width: none;
@@ -63,7 +65,7 @@ html, body {
   text-align: center;
 }
 
-/* текст сигналов */
+/* текст */
 #distance {
   font-family: 'Bighaustitul', sans-serif;
   font-size: 10vw;
@@ -71,7 +73,6 @@ html, body {
   color: orange;
   text-shadow: 0 0 10px orange;
   margin: 0;
-  margin-top: 3vh;
 }
 
 #coef {
@@ -106,7 +107,7 @@ html, body {
 .controls {
   width: 100%;
   position: fixed;
-  bottom: -5vh;
+  bottom: -8vh;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -187,10 +188,25 @@ input {
   color: #fff;
 }
 
-/* 📱 адаптация для маленьких экранов */
+/* 📱 адаптация */
 @media (max-width: 400px) {
+  #distance { font-size: 8vw; }
+  #coef { font-size: 12vw; }
+  .loader { width: 18vw; height: 18vw; border: 1.5vw solid #333; border-top: 1.5vw solid gold; }
+  button { font-size: 4vw; padding: 2vh; }
+  #countdown { font-size: 3.5vw; }
+}
+
+@media (min-width: 401px) and (max-width: 768px) {
+  #distance { font-size: 7vw; }
+  #coef { font-size: 10vw; }
+  .loader { width: 15vw; height: 15vw; }
+  button { font-size: 3.5vw; }
+}
+
+@media (min-width: 769px) {
   #distance { font-size: 5vw; }
   #coef { font-size: 7vw; }
-  button { font-size: 3.5vw; padding: 2vh; }
-  #countdown { font-size: 3vw; }
+  .loader { width: 10vw; height: 10vw; }
+  button { font-size: 2vw; }
 }
