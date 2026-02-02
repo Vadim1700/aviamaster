@@ -7,36 +7,31 @@
 html, body {
   margin: 0;
   padding: 0;
-  min-height: 100%;
+  min-height: 200%; /* увеличили высоту, чтобы была прокрутка */
   font-family: 'Trebuchet MS', sans-serif;
-  background: url('IMG/Copilot_20260131_120237.png') no-repeat center center fixed;
-  background-size: cover;
+  background-color: #000;
   color: #fff;
-  overflow-y: auto; /* ✅ прокрутка включена */
+  overflow-y: auto; /* прокрутка включена */
 }
 
+/* картинка фиксируется сверху */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100vh;
+  background: url('IMG/Copilot_20260131_120237.png') no-repeat center center;
+  background-size: cover;
+  z-index: -1;
+}
+
+/* скрываем линию скролла */
+::-webkit-scrollbar { display: none; }
 html, body {
-  margin: 0;
-  padding: 0;
-  min-height: 100%;
-  overflow-y: auto; /* прокрутка работает */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
-
-/* Chrome, Safari, Opera */
-::-webkit-scrollbar {
-  display: none;
-}
-
-/* Firefox */
-html, body {
-  scrollbar-width: none; /* скрыть */
-}
-
-/* IE и старый Edge */
-html, body {
-  -ms-overflow-style: none; /* скрыть */
-}
-
 
 .app {
   width: 100%;
@@ -47,62 +42,59 @@ html, body {
   align-items: center;
 }
 
-/* ✅ рамка фиксирована */
+/* рамка */
 .signal-frame {
-  width: 100%;
+  width: 90vw;
+  max-width: 400px;
   aspect-ratio: 1 / 1;
   position: fixed;
-  top: 15%;          /* положение рамки от верхнего края */
+  top: 15vh;
   left: 50%;
   transform: translateX(-50%);
 }
 
-/* ✅ блок сигналов и loader в одном месте */
+/* блок сигналов */
 .signal-block {
-  position: absolute;
-  top: 55%; 
+  position: fixed;
+  top: 65%;
   left: 50%;
-  transform: translate(-50%, -50%); /* центр по диагонали */
-  width: 75%;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* текст по центру */
-  align-items: center;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  text-align: center;
 }
 
 /* текст сигналов */
 #distance {
   font-family: 'Bighaustitul', sans-serif;
-  font-size: 3.5em;
+  font-size: 10vw;
   font-weight: 900;
   color: orange;
   text-shadow: 0 0 10px orange;
   margin: 0;
-  margin-top: 30px;
+  margin-top: 3vh;
 }
 
 #coef {
   font-family: 'Bighaustitul', sans-serif;
-  font-size: 5.5em;
+  font-size: 15vw;
   font-weight: 900;
   color: limegreen;
   text-shadow: 0 0 10px limegreen;
-  margin: 5px 0 0 0;
+  margin: 2vh 0 0 0;
 }
 
-/* loader по центру рамки */
+/* loader */
 .loader {
-  position: absolute;
-  top: 50%; 
+  position: fixed;
+  top: 55%;
   left: 50%;
-  transform: translate(-50%, -50%); /* ✅ центр по диагонали */
-  width: 50px;
-  height: 50px;
-  border: 6px solid #333;
-  border-top: 6px solid gold;
+  transform: translate(-50%, -50%);
+  width: 12vw;
+  height: 12vw;
+  border: 1vw solid #333;
+  border-top: 1vw solid gold;
   border-radius: 50%;
-  animation: spin 1s linear infinite; /* ✅ оставляем только вращение */
+  animation: spin 1s linear infinite;
 }
 
 @keyframes spin {
@@ -110,36 +102,30 @@ html, body {
   100% { transform: translate(-50%, -50%) rotate(360deg);}
 }
 
-@keyframes glow {
-  from { box-shadow: 0 0 10px gold; }
-  to { box-shadow: 0 0 25px gold, 0 0 40px orange; }
-}
-
+/* кнопки */
 .controls {
   width: 100%;
-  position: absolute;   /* или fixed, в зависимости от твоей логики */
-  bottom: -5%;          /* текущее положение */
+  position: fixed;
+  bottom: -5vh;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: 50px;     /* ✅ добавляем отступ сверху */
 }
 
-
 button {
-  width: 90%;
+  width: 80vw;
   max-width: 300px;
-  padding: 15px;
-  font-size: 1.2em;
+  padding: 2.5vh;
+  font-size: 4vw;
   border: none;
   border-radius: 10px;
   background: linear-gradient(to bottom, crimson, orange);
   color: gold;
   font-weight: bold;
   cursor: pointer;
-  margin: 10px 0;
+  margin: 1.5vh 0;
   transition: transform 0.2s, box-shadow 0.3s;
 }
 
@@ -155,9 +141,9 @@ button:disabled {
 }
 
 #countdown {
-  font-size: 1.1em;
+  font-size: 3.5vw;
   color: gold;
-  margin-top: 5px;
+  margin-top: 1vh;
   text-align: center;
 }
 
@@ -201,3 +187,10 @@ input {
   color: #fff;
 }
 
+/* 📱 адаптация для маленьких экранов */
+@media (max-width: 400px) {
+  #distance { font-size: 5vw; }
+  #coef { font-size: 7vw; }
+  button { font-size: 3.5vw; padding: 2vh; }
+  #countdown { font-size: 3vw; }
+}
